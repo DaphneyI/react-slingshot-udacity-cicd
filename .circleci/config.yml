@@ -32,9 +32,10 @@ jobs:
       - run: npm audit
 workflows:
   my-workflow:
-    - build
-    - test:
-        requires: 
-          - build
-    - analyze
+    jobs:
+      - build
+      - test:
+          requires: 
+            - build
+      - analyze
 
