@@ -2,7 +2,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/node:14.18.2
+      - image: circleci/node:13.8.0
 commands:
   install-dependencies:
     steps:
@@ -37,5 +37,7 @@ workflows:
       - test:
           requires: 
             - build
-      - analyze
+      - analyze:
+          requires:
+            - test
 
