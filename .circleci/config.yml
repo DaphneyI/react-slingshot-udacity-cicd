@@ -29,6 +29,7 @@ jobs:
   analyze:
     executor: default
     steps:
+      - checkout
       - run: npm audit
 workflows:
   my-workflow:
