@@ -13,7 +13,7 @@ jobs:
     steps:
       - checkout
       - install-dependencies
-      - save-cache:
+      - save_cache:
           key: npm-packages
           paths:
             - src/node_modules
@@ -22,7 +22,7 @@ jobs:
     executor: default
     steps: 
       - checkout
-      - restore-cache:
+      - restore_cache:
           key: npm-packages
       - install-dependencies
       - run: npm run test
