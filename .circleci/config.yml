@@ -1,0 +1,39 @@
+version: 2.1
+executors:
+  default:
+    docker:
+      - image: cimg/node:stable
+commands:
+  install-dependencies:
+    steps:
+      - run: npm i
+jobs:
+  build:
+    executor: default
+    steps:
+      - checkout
+      - install-dependencies
+      - save-cache:
+          key: npm-packages
+          paths:
+            - src/node_modules
+      - run: npm run lint
+  test:
+    executor: default
+    steps: 
+      - checkout
+      - restore-cache:
+          key: npm-packages
+      - install-dependencies
+      - run: npm run test
+  analyze:
+    executor: default
+    steps:
+      - run: npm audit
+workflows:
+  my-workflow:
+    - build
+    - test:
+        requires: build
+    - analyze
+
